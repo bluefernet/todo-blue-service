@@ -32,6 +32,7 @@ app.get(
 	'*',
 	async (req: Request, res: Response): Promise<void> => {
 		const taskID = <string>req.query.id;
+		console.log('task-ednpoint ' +taskID);
 		try {
 			const task = await asyncGetTask(taskID);
 			res.json({

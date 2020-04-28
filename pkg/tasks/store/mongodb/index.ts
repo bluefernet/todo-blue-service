@@ -32,10 +32,12 @@ export const asyncTasksList = async (): Promise<TasksList> => {
 
 export const asyncGetTask = async (taskId: string): Promise<Task | null> => {
 	const client = await MongoDatabase.connect();
+	console.log('store-mongodb ' + taskId);
 	let data: Task | null = await client
 		.db('db')
 		.collection(constants.COLLECTION_TASKS)
 		.findOne({ id: taskId, deleted: false }, { projection: { _id: 0 } });
+	console.log(data)
 	return data
 }
 
