@@ -32,6 +32,10 @@
         "@typescript-eslint/indent": [
             "error",
             "tab"
-        ]
+        ],
+        "max-len": ["error", { "code": 80 }],
+        "array-bracket-newline": ["error", "always"],
+        "no-trailing-spaces": "error",
+        "no-multiple-empty-lines": ["error", { "max": 1, "maxEOF": 1 }]
     }
 }

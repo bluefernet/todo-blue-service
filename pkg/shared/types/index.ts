@@ -1,12 +1,13 @@
 export interface Task {
-	id: String,
-	title: String,
-	stauts: String,
-	date: String
+	id: String;
+	title: String;
+	stauts: String;
+	date: String;
+	deleted: boolean
 }
 
 export interface TasksList {
-	tasks: Task,
+	tasks: Task[],
 	nextpageToken: String,
 	totalSize: Number
 }

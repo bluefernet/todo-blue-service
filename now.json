@@ -16,8 +16,8 @@
             "dest": "/pkg/tasks/transport/http/tasks-endpoint.ts"
         },
         {
-            "src": "/v1/task",
-            "dest": "/pkg/tasks/transport/http/task-endpoint.ts"
+            "src": "/v1/task/(?<id>[^/]+)",
+            "dest": "/pkg/tasks/transport/http/task-endpoint.ts?id=$id"
         }
     ]
 }
