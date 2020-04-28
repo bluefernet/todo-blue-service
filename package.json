@@ -10,6 +10,7 @@
     "node": "10.x"
   },
   "dependencies": {
+    "@now/node": "^1.5.1",
     "@types/body-parser": "^1.17.0",
     "@types/express": "^4.17.0",
     "@types/mongodb": "^3.1.28",
