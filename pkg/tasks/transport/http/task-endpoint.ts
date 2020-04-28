@@ -19,3 +19,5 @@ app.post(
 		res.json(data);
 	},
 );
+
+export default app;
