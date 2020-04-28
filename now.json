@@ -1,20 +1,23 @@
 {
-    "version": 1,
-    "env": {},
+    "version": 2,
     "builds": [
         {
-            "src": "./pkg/api/shared/**/*.ts",
+            "src": "./pkg/shared/**/*.ts",
             "use": "@now/node"
         },
         {
-            "src": "./pkg/api/tasks/**/*.ts",
+            "src": "./pkg/tasks/**/*.ts",
             "use": "@now/node"
         }
     ],
     "routes": [
         {
             "src": "/v1/tasks",
-            "dest": "/pkg/api/tasks/transport/http/tasks-endpoint.ts"
+            "dest": "/pkg/tasks/transport/http/tasks-endpoint.ts"
+        },
+        {
+            "src": "/v1/task",
+            "dest": "/pkg/tasks/transport/http/task-endpoint.ts"
         }
     ]
 }

@@ -6,12 +6,12 @@ const app = express();
 app.use(json());
 
 app.get(
-    '*',
-    async (req: Request, res: Response): Promise<void> => {
-        res.json({
-          response: 'response ok'
-        });
-    },
+	'*',
+	async (req: Request, res: Response): Promise<void> => {
+		res.json({
+			response: 'response ok'
+		});
+	},
 );
 
 export default app;
