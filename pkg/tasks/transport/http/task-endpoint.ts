@@ -3,7 +3,7 @@ import express from 'express';
 import { json } from 'body-parser';
 import { urlencoded } from 'body-parser';
 import { Task } from '../../../shared/types'
-import {asyncGetTask, asyncUpdateTask } from '../../service/base/tasks-service'
+import { asyncGetTask, asyncUpdateTask } from '../../service/base/tasks-service'
 
 const app = express();
 app.use(json());
@@ -23,12 +23,18 @@ app.put(
 
 app.get(
 	'*',
-	async(req: Request, res:Response): Promise<void> => {
-		const taskID = <string> req.query.id;
-		const task = await asyncGetTask(taskID);
-		res.json({
-			task: task
-		})
+	async (req: Request, res: Response): Promise<void> => {
+		const taskID = <string>req.query.id;
+		try {
+			const task = await asyncGetTask(taskID);
+			res.json({
+				task: task
+			})
+		} catch (error) {
+			res.json({
+				status: error
+			})
+		}
 	}
 )
 
