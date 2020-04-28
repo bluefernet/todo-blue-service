@@ -13,11 +13,18 @@ app.put(
 	'*',
 	async (req: Request, res: Response): Promise<void> => {
 		let task: Task = req.body;
-		task = await asyncUpdateTask(task);
-		res.json({
-			response: 'response ok',
-			taskUpdate: task
-		})
+		const taskID = <string>req.query.id;
+		try {
+			task = await asyncUpdateTask(taskID, task);
+			res.json({
+				response: 'response ok',
+				taskUpdate: task
+			})
+		} catch (error) {
+			res.json({
+				error: error
+			})
+		}
 	}
 )
 

@@ -34,7 +34,10 @@ export const asyncGetTask =
 		}
 	}
 
-export const asyncUpdateTask = async (task: Task): Promise<Task> => {
+export const asyncUpdateTask = async (taskID: string, task: Task): Promise<Task> => {
+	if( taskID != task.id && task.id != null && task.id != ''){
+		throw new Error('You cannot modify the id, you are trying to update a different record');
+	}
 	let data: Task = await _asyncUpdateTask(task)
 	return data
 }

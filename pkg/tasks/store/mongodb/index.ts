@@ -44,7 +44,7 @@ export const asyncUpdateTask = async (task: Task): Promise<Task> => {
 	let data = await client
 		.db('db')
 		.collection(constants.COLLECTION_TASKS)
-		.updateOne({ id: task.id }, { task })
+		.updateOne({ id: task.id }, { $set: task })
 	console.log(data)
 	return task
 }
