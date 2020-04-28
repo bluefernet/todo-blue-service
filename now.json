@@ -1,0 +1,20 @@
+{
+    "version": 1,
+    "env": {},
+    "builds": [
+        {
+            "src": "./pkg/shared/**/*.ts",
+            "use": "@now/node"
+        },
+        {
+            "src": "./pkg/tasks/**/*.ts",
+            "use": "@now/node"
+        }
+    ],
+    "routes": [
+        {
+            "src": "/v1/tasks",
+            "dest": "/pkg/tasks/transport/http/tasks-endpoint.ts"
+        }
+    ]
+}
