@@ -33,7 +33,7 @@
             "error",
             "tab"
         ],
-        "max-len": ["error", { "code": 80 }],
+        "max-len": ["error", { "code": 80 }, { "ignoreStrings": true }],
         "array-bracket-newline": ["error", "always"],
         "no-trailing-spaces": "error",
         "no-multiple-empty-lines": ["error", { "max": 1, "maxEOF": 1 }]
