@@ -1,6 +1,6 @@
 const corsOptions = {
 	origin: [
-		"https://todo-blue-ui-staging.now.sh"
+		"https://todo-blue-ui.now.sh"
 	],
 	methods: [
 		"GET", "HEAD", "PUT", "PATCH", "POST", "DELETE", "OPTIONS"
