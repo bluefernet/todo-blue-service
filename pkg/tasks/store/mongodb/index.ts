@@ -6,6 +6,7 @@ import { ulid } from 'ulid'
 export const asyncCreateTask = async (task: Task): Promise<Task> => {
 	const client = await MongoDatabase.connect();
 	task.id = ulid();
+	task.deleted = false;
 	const result = await client
 		.db("db")
 		.collection(constants.COLLECTION_TASKS)
