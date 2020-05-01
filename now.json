@@ -18,6 +18,10 @@
         {
             "src": "/v1/task/(?<id>[^/]+)",
             "dest": "/pkg/tasks/transport/http/task-endpoint.ts?id=$id"
+        },
+        {
+            "src": "/v1/tasksState/(?<state>[^/]+)",
+            "dest": "/pkg/tasks/transport/http/tasks-state-endpoint.ts?state=$state"
         }
     ]
 }

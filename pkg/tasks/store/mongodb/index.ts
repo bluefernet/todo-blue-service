@@ -20,7 +20,7 @@ export const asyncTasksList = async (): Promise<TasksList> => {
 	const tasks = await client
 		.db('db')
 		.collection(constants.COLLECTION_TASKS)
-		.find({}, { projection: { _id: 0 } })
+		.find({ deleted: false }, { projection: { _id: 0 } })
 		.toArray();
 
 	const tasksList: TasksList = {
@@ -30,6 +30,23 @@ export const asyncTasksList = async (): Promise<TasksList> => {
 	}
 	return tasksList
 }
+
+export const asyncTasksStateList =
+	async (_state: string): Promise<TasksList> => {
+		const client = await MongoDatabase.connect();
+		const tasks = await client
+			.db('db')
+			.collection(constants.COLLECTION_TASKS)
+			.find({ state: _state, deleted: false }, { projection: { _id: 0 } })
+			.toArray();
+
+		const tasksList: TasksList = {
+			tasks: tasks,
+			nextpageToken: '',
+			totalSize: tasks.length
+		}
+		return tasksList
+	}
 
 export const asyncGetTask = async (taskId: string): Promise<Task | null> => {
 	const client = await MongoDatabase.connect();
@@ -44,6 +61,7 @@ export const asyncGetTask = async (taskId: string): Promise<Task | null> => {
 
 export const asyncUpdateTask = async (task: Task): Promise<Task> => {
 	const client = await MongoDatabase.connect();
+	task.deleted = Boolean(task.deleted)
 	let data = await client
 		.db('db')
 		.collection(constants.COLLECTION_TASKS)

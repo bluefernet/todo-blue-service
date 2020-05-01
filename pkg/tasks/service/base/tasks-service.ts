@@ -2,9 +2,11 @@ import {
 	asyncCreateTask as _asyncCreateTask,
 	asyncTasksList as _asyncTasksList,
 	asyncGetTask as _asyncGetTask,
-	asyncUpdateTask as _asyncUpdateTask
+	asyncUpdateTask as _asyncUpdateTask,
+	asyncTasksStateList as _asyncTasksStateList
 } from '../../store/mongodb'
 import { Task, TasksList } from '../../../shared/types'
+import * as constants from '../../../shared/constants'
 
 export const asyncCreateTask = async (task: Task): Promise<Task> => {
 	if (task) {
@@ -23,6 +25,26 @@ export const asyncTasksList = async (): Promise<TasksList> => {
 		throw new Error('There is no List of tasks specified');
 	}
 }
+
+export const asyncTasksStateList =
+	async (_state: string): Promise<TasksList> => {
+		if (_state != '' && _state != null && _state != undefined) {
+			if (_state != constants.TASK_STATUS_CLOSED
+				&& _state != constants.TASK_STATUS_CREATED
+				&& _state != constants.TASK_STATUS_DOING) {
+				throw new Error('Specified state is not correct');
+			}
+		} else {
+			throw new Error('State is not defined');
+
+		}
+		const tasksList: TasksList = await _asyncTasksStateList(_state);
+		if (tasksList) {
+			return tasksList
+		} else {
+			throw new Error('There is no List of tasks specified');
+		}
+	}
 
 export const asyncGetTask =
 	async (taskId: string): Promise<Task | undefined> => {
