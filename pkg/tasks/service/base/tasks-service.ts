@@ -29,8 +29,8 @@ export const asyncTasksList = async (): Promise<TasksList> => {
 export const asyncTasksStateList =
 	async (_state: string): Promise<TasksList> => {
 		if (_state != '' && _state != null && _state != undefined) {
-			if (_state != constants.TASK_STATUS_CLOSED
-				&& _state != constants.TASK_STATUS_CREATED
+			if (_state != constants.TASK_STATUS_DONE
+				&& _state != constants.TASK_STATUS_TODO
 				&& _state != constants.TASK_STATUS_DOING) {
 				throw new Error('Specified state is not correct');
 			}

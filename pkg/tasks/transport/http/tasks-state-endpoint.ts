@@ -27,7 +27,7 @@ app.get(
 			})
 		} catch (error) {
 			res.json({
-				status: error
+				error: error.message
 			})
 		}
 	}
