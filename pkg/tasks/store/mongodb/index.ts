@@ -61,21 +61,17 @@ export const asyncGetTask = async (taskId: string): Promise<Task | null> => {
 
 export const asyncUpdateTask = async (task: Task): Promise<Task> => {
 	const client = await MongoDatabase.connect();
-	console.log('UpdateTask deleted ' + task.deleted)
-	console.log('UpdateTask deleted ' + task.deleted.valueOf())
-	if(
-		String(task.deleted) == 'true'
-	){
+	if (String(task.deleted) == 'true') {
 		task.deleted = true
-	}else{
+	} else {
 		if (String(task.deleted) == 'false') {
 			task.deleted = false
+		}else{
+			throw new Error('deleted - Boolean value not correct');
+
 		}
-		throw new Error('deleted - boolean value not correct');
-		
 	}
-	String(task.deleted)
-	task.deleted = task.deleted.valueOf()
+
 	console.log('UpdateTask deleted ' + task.deleted)
 	let data = await client
 		.db('db')
