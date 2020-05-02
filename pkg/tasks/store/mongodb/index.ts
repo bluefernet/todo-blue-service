@@ -61,7 +61,10 @@ export const asyncGetTask = async (taskId: string): Promise<Task | null> => {
 
 export const asyncUpdateTask = async (task: Task): Promise<Task> => {
 	const client = await MongoDatabase.connect();
-	task.deleted = Boolean(task.deleted)
+	console.log('UpdateTask deleted ' + task.deleted)
+	console.log('UpdateTask deleted ' + task.deleted.valueOf())
+	task.deleted = task.deleted.valueOf()
+	console.log('UpdateTask deleted ' + task.deleted)
 	let data = await client
 		.db('db')
 		.collection(constants.COLLECTION_TASKS)
