@@ -71,7 +71,7 @@ export const asyncUpdateTask =
 		} else {
 			if (String(task.deleted) == 'false') {
 				task.deleted = false
-			}else{
+			} else {
 				throw new Error('deleted - Boolean value not correct');
 			}
 		}

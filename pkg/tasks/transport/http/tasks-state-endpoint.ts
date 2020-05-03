@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import express from 'express';
 import { json } from 'body-parser';
 import { urlencoded } from 'body-parser';
-import { asyncTasksStateList} from '../../service/base/tasks-service'
+import { asyncTasksStateList } from '../../service/base/tasks-service'
 import corsOptions from '../../../shared/cors';
 
 const app = express();

@@ -8,7 +8,7 @@ export interface Task {
 
 export interface TasksList {
 	tasks: Task[],
-	nextpageToken: String,
+	nextpageToken: String, //TODO --> PAGINAZIONE
 	totalSize: Number
 }
 
