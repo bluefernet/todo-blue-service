@@ -5,13 +5,19 @@ import { ulid } from 'ulid'
 
 export const asyncCreateTask = async (task: Task): Promise<Task> => {
 	const client = await MongoDatabase.connect();
+
 	task.id = ulid();
 	task.deleted = false;
+
 	const result = await client
 		.db("db")
 		.collection(constants.COLLECTION_TASKS)
 		.insertOne(task);
-	console.log(result)
+
+	if (result.result.ok != 1) {
+		throw new Error('Insert operation failed');
+	}
+
 	return task;
 }
 
@@ -40,6 +46,10 @@ export const asyncTasksStateList =
 			.find({ state: _state, deleted: false }, { projection: { _id: 0 } })
 			.toArray();
 
+		if (!tasks) {
+			throw new Error('No Tasks found for the specified state');
+		}
+
 		const tasksList: TasksList = {
 			tasks: tasks,
 			nextpageToken: '',
@@ -48,34 +58,28 @@ export const asyncTasksStateList =
 		return tasksList
 	}
 
-export const asyncGetTask = async (taskId: string): Promise<Task | null> => {
+export const asyncGetTask = async (taskId: string): Promise<Task> => {
 	const client = await MongoDatabase.connect();
-	console.log('store-mongodb ' + taskId);
-	let data: Task | null = await client
+
+	let data = await client
 		.db('db')
 		.collection(constants.COLLECTION_TASKS)
 		.findOne({ id: taskId, deleted: false }, { projection: { _id: 0 } });
-	console.log(data)
+
 	return data
 }
 
 export const asyncUpdateTask = async (task: Task): Promise<Task> => {
 	const client = await MongoDatabase.connect();
-	if (String(task.deleted) == 'true') {
-		task.deleted = true
-	} else {
-		if (String(task.deleted) == 'false') {
-			task.deleted = false
-		}else{
-			throw new Error('deleted - Boolean value not correct');
 
-		}
-	}
-
-	console.log('UpdateTask deleted ' + task.deleted)
-	let data = await client
+	let result = await client
 		.db('db')
 		.collection(constants.COLLECTION_TASKS)
 		.updateOne({ id: task.id }, { $set: task })
+
+	if (result.result.ok != 1) {
+		throw new Error('Update operation failed');
+	}
+
 	return task
 }

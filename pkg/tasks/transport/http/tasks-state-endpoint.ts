@@ -17,7 +17,7 @@ app.get(
 	cors(corsOptions),
 	async (req: Request, res: Response): Promise<void> => {
 		const state = <string>req.query.state;
-		console.log('tasks-status-ednpoint ' +state);
+
 		try {
 			const tasks = await asyncTasksStateList(state);
 			res.json({
@@ -30,6 +30,7 @@ app.get(
 				error: error.message
 			})
 		}
+
 	}
 )
 
