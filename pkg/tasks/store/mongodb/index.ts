@@ -27,7 +27,7 @@ export const asyncTasksList = async (): Promise<TasksList> => {
 		.db('db')
 		.collection(constants.COLLECTION_TASKS)
 		.find({ deleted: false }, { projection: { _id: 0 } })
-		.sort({ date: -1 }) //Decrescente
+		.sort({ date: 1 }) //Decrescente
 		.toArray();
 	//TODO- LIMIT/SKIP --> PAGINAZIONE
 	const tasksList: TasksList = {
@@ -45,7 +45,7 @@ export const asyncTasksStateList =
 			.db('db')
 			.collection(constants.COLLECTION_TASKS)
 			.find({ state: _state, deleted: false }, { projection: { _id: 0 } })
-			.sort({ date: -1 }) //Decrescente
+			.sort({ date: 1 }) //Crescente
 			.toArray();
 
 		if (!tasks) {
